@@ -35,7 +35,7 @@ To access the data from a PC, simply plug it into a USB port. Ensure you ARE NOT
 
 ## Pictures
 
-Prototype board with casing made from wood. Had lots of little hardware failures that needed repairing while prototype board.
+Prototype board with casing made from wood. Had lots of little hardware failures that needed repairing while working on this board.
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0149.JPG)
 
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0150.JPG)
