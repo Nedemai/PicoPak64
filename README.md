@@ -16,11 +16,7 @@ Given a N64 Controller Pak is 32kb in size, and given the current Pico boards 2M
 
 Plug the pak into a N64 controller and load a game that uses it. Upon first use, the game should complain something to the effect that the data is corrupt and needs to be restored. You need to allow this restore to happen so that the data is properly formatted to be used. Wait 6 seconds for the LED to flash to ensure the data is stored to the FLASH ROM.
 
-```html
-<span style="color: red">
 THE DATA WILL NOT WRITE TO THE PICOS FLASH IMMEDIATELY. YOU MUST WAIT APPROXIMATELY 6 SECONDS FOR THE LED TO FLASH ON AND THEN OFF TO ENSURE DATA IT PROPERLY STORED TO THE FLASH ROM. IF YOU DO NOT WAIT FOR THIS YOU WILL LOOSE YOUR DATA. YOU MUST DO THIS EVERYTIME YOU SAVE A GAME.
-</span>
-```
 
 To access the data from a PC, simply plug it into a USB port. Ensure you ARE NOT holding down the BOOTSEL button while doing this.
 
