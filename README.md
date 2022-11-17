@@ -1,4 +1,4 @@
-#PicoPak64
+## PicoPak64
 
 PicoPak64 uses a Raspberry Pi Pico to emulate the n64 controller pak SRAM and saves data directly into the FLASH ROM non volatile storage. It is able to manage this without the need of overclocking. Using TinyUSB, it is able to usb mount the data saved to the FLASH ROM to be able to be copied to the computer for easy backup. In the future it is planned to allow memory card data to be copied from a computer back into the pico as well.
 
@@ -23,10 +23,15 @@ To access the data from a PC, simply plug it into a USB port. Ensure you ARE NOT
 ## IDEAS AND TODOS
 
 -- allow for multiple Controller Paks to be stored
+
 -- allow writing files from PC to the Pico through USB (as of the moment it is Read Only)
+
 -- create a CAD model for the PCB so it can be sent to a mill
+
 -- create STL model for the casing so it can be 3d printed, etc
+
 -- repurpose PIN 26 as another button or LED? 
+
 
 ## Pictures
 
