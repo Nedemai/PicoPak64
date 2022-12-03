@@ -41,7 +41,5 @@ Prototype board with casing made from wood. Had lots of little hardware failures
 
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0150.JPG)
 
-![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0151.JPG)
-
 Circuit Block Diagram
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/PicoPak64_block_diagram.png)
