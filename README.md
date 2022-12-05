@@ -1,6 +1,6 @@
 ## PicoPak64
 
-PicoPak64 uses a Raspberry Pi Pico to emulate the n64 controller pak SRAM and saves data directly into the FLASH ROM non volatile storage. It is able to manage this without the need for overclocking. Using TinyUSB, it is able to usb mount the data saved to the FLASH ROM to be able to be copied to the computer for easy backup. In the future it is planned to allow memory card data to be copied from a computer back into the pico as well.
+PicoPak64 uses a Raspberry Pi Pico to emulate the n64 controller pak SRAM and saves data directly into the FLASH ROM non volatile storage. It is able to manage this without the need for overclocking. Using TinyUSB, it is able to USB mount the data saved to the FLASH ROM to be able to be copied to and from the computer for easy backup. 
 
 ## How it Works
 
@@ -16,15 +16,21 @@ Given a N64 Controller Pak is 32kb in size, and given the current Pico boards 2M
 
 Plug the pak into a N64 controller and load a game that uses it. Upon first use, the game should complain something to the effect that the data is corrupt and needs to be restored. You need to allow this restore to happen so that the data is properly formatted to be used. Wait 6 seconds for the LED to flash to ensure the data is stored to the FLASH ROM.
 
-THE DATA WILL NOT WRITE TO THE PICOS FLASH IMMEDIATELY. YOU MUST WAIT APPROXIMATELY 6 SECONDS FOR THE LED TO FLASH ON AND THEN OFF TO ENSURE DATA IT PROPERLY STORED TO THE FLASH ROM. IF YOU DO NOT WAIT FOR THIS YOU WILL LOOSE YOUR DATA. YOU MUST DO THIS EVERYTIME YOU SAVE A GAME.
+*** Data will not write to the Picos FLASH ROM immediately. You must wait approximately 6 seconds for the LED to flash on and then off to ensure data is properly stored to the flash rom. If you do not wait for this, you will loose your data. You must do this every time you save a game. ***
 
 To access the data from a PC, simply plug it into a USB port. Ensure you ARE NOT holding down the BOOTSEL button while doing this.
+
+To copy data from PC back to the card, ensure you backup your data first! Name the file you wish to transfer to the pico "MEMPAK.MPK" without the quotes. Copy this file over the existing file on the Pico. The led will flash to show that data is being stored to the FLASH ROM. This feature has not been thoroughly tested, if it doesn't work the first time around try unplugging the pico, plugging it back in and recopying the file. The idea is the FAT and directory structure must remain the same. This has not been tested on any OS other than Windows.
+
+Avoiding saving data back to the pico more often than is necessary, this includes saving games while playing. Although robust, the FLASH ROM is only rated for 100k erase/write cycles. Normal use is unlikely to ever hit this limit.
 
 ## IDEAS AND TODOS
 
 -- allow for multiple Controller Paks to be stored
 
--- allow writing files from PC to the Pico through USB (as of the moment it is Read Only)
+-- have an erase/write cycle counter stored somewhere.
+
+-- implement some wear level code to avoid writing more data than is necessary to the FLASH ROM.
 
 -- create a CAD model for the PCB so it can be sent to a mill
 
@@ -40,8 +46,6 @@ Prototype board with casing made from wood. Had lots of little hardware failures
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0149.JPG)
 
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0150.JPG)
-
-![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/IMG_0151.JPG)
 
 Circuit Block Diagram
 ![](https://raw.githubusercontent.com/Nedemai/PicoPak64/main/Images/PicoPak64_block_diagram.png)

@@ -22,7 +22,8 @@
  * THE SOFTWARE.
  *
  */
-
+#include "hardware/gpio.h"
+#include "hardware/flash.h"
 #include "bsp/board.h"
 #include "tusb.h"
 #include <stdio.h>
@@ -38,10 +39,11 @@ static bool ejected = false;
 // Some MCU doesn't have enough 8KB SRAM to store the whole disk
 // We will use Flash as read-only disk with board that has
 // CFG_EXAMPLE_MSC_READONLY defined
+int count = 0;
 
 enum
 {
-  DISK_BLOCK_NUM = 100, // 8KB is the smallest size that windows allow to mount (be sure to accomidate for all sectors)
+  DISK_BLOCK_NUM = 132, // 8KB is the smallest size that windows allow to mount (be sure to accomidate for all sectors)
   DISK_BLOCK_SIZE = 512 // this is also the sector and cluster
   // 16 * 512 = 8kb
   // 100 * 512 = 51,200 bytes
@@ -194,7 +196,7 @@ void tud_msc_inquiry_cb(uint8_t lun, uint8_t vendor_id[8], uint8_t product_id[16
 bool tud_msc_test_unit_ready_cb(uint8_t lun)
 {
   (void)lun;
-
+count = 0;
   // This loads FLASH ROM data into RAM to be accessed from USB, and probably is bad placing here.
   for (int i = 0; i < 64; i++)
   {
@@ -284,6 +286,20 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
   // out of ramdisk
   if (lba >= DISK_BLOCK_NUM)
     return -1;
+
+ count = count + 1;
+    if(count >= 66)//64*512 is 32kb + 1024 bytes for FAT and root directory. = 66
+    {
+      count = 0;
+      gpio_put(25,1);
+      uint32_t ints = save_and_disable_interrupts();
+      flash_range_erase(FLASH_TARGET_OFFSET, (32768UL + 1)); // 4kb * 7 = 32kb must be multiple of 4kb
+      sleep_us(1);
+      flash_range_program(FLASH_TARGET_OFFSET, &msc_disk[3][0], (32768UL + 1)); // 256 * 36 = 32kb must be multiple of 256
+      restore_interrupts(ints);
+      sleep_ms(500);
+      gpio_put(25, 0);
+    }
 
 #ifndef CFG_EXAMPLE_MSC_READONLY
   uint8_t *addr = msc_disk[lba] + offset;
